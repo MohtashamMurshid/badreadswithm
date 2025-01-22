@@ -13,7 +13,7 @@ export default async function Page({
   return (
     <div className="p-10 max-w-4xl mx-auto">
       <Link href="/" passHref className="fixed top-4 left-4">
-        <FaArrowLeft className="text-white text-xl cursor-pointer" />
+        <FaArrowLeft className=" text-xl cursor-pointer" />
       </Link>
       {/* Title and Subtitle */}
       <h1 className="text-3xl font-bold">{bookInfo.title}</h1>
