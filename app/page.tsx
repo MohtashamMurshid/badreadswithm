@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
-export default function Home() {
+export default function Page() {
   const [query, setQuery] = useState("");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [books, setBooks] = useState<any[]>([]);
@@ -79,6 +79,11 @@ export default function Home() {
           </Link>
         ))}
       </div>
+      <footer className="p-4 ">
+        <p className="text-center ">
+          &copy; {new Date().getFullYear()} Bad Reads
+        </p>
+      </footer>
     </div>
   );
 }
