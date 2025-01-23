@@ -1,4 +1,7 @@
+import StarButton from "@/components/favourite-button";
+import ReadLater from "@/components/readLater";
 import { fetchOneBookInfo } from "@/utils/oneBookInfo";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
@@ -31,6 +34,18 @@ export default async function Page({
           height={400}
         />
       )}
+
+      <div className="mt-4 flex flex-row space-x-4">
+        <SignedIn>
+          <ReadLater id={(await params).id} />
+          <StarButton id={(await params).id} />
+        </SignedIn>
+        <SignedOut>
+          <p className="text-gray-500">
+            Sign in to add to your favourites and read later
+          </p>
+        </SignedOut>
+      </div>
 
       {/* Authors */}
       {bookInfo.authors.length > 0 && (
