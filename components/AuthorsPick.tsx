@@ -5,8 +5,8 @@ import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { app } from "@/firebaseConfig";
 import Image from "next/image";
 import Link from "next/link";
-import Loading from "@/components/Loading";
 import { fetchOneBookInfo } from "@/utils/oneBookInfo";
+import Fallback from "./Fallback";
 
 interface Book {
   id: string;
@@ -63,7 +63,7 @@ export default function AuthorsPick() {
     fetchFavoriteBooks();
   }, []);
 
-  if (loading) return <Loading />;
+  if (loading) return <Fallback />;
 
   return (
     <div className="w-full p-4 ">
