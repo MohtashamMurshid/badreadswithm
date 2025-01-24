@@ -1,7 +1,6 @@
 import Landing from "@/components/Landing";
 import SearchBooks from "@/components/SearchBooks";
 import BookCategories from "@/components/BookCategories";
-import Footer from "@/components/Footer";
 import { Suspense } from "react";
 import Fallback from "@/components/Fallback";
 
@@ -13,7 +12,6 @@ export default function Page() {
       <Suspense fallback={<Fallback />}>
         <BookCategories />
       </Suspense>
-      <Footer />
     </div>
   );
 }
