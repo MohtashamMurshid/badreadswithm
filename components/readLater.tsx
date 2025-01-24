@@ -12,12 +12,13 @@ export default function ReadLater({ id }: { id: string }) {
 
   useEffect(() => {
     const checkReadLaterStatus = async () => {
-      if (user && user.emailAddresses) {
+      if (user?.emailAddresses?.[0]?.emailAddress) {
         const userEmail = user.emailAddresses[0].emailAddress;
-        const docRef = doc(db, "users", userEmail, "readLater", id);
+        const docRef = doc(db, "users", userEmail, "bookLists", "readLater");
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          setReadLater(true);
+          const readLaterList = docSnap.data().books || [];
+          setReadLater(readLaterList.includes(id));
         }
       }
     };
@@ -26,12 +27,26 @@ export default function ReadLater({ id }: { id: string }) {
   }, [user, id, db]);
 
   const handleReadLaterClick = async () => {
-    setReadLater(!readLater);
-    if (user && user.emailAddresses) {
+    if (user?.emailAddresses?.[0]?.emailAddress) {
       const userEmail = user.emailAddresses[0].emailAddress;
-      const readLaterId = id;
-      const docRef = doc(db, "users", userEmail, "readLater", readLaterId);
-      await setDoc(docRef, { readLaterId }, { merge: true });
+      const docRef = doc(db, "users", userEmail, "bookLists", "readLater");
+      const docSnap = await getDoc(docRef);
+
+      let readLaterList = [];
+      if (docSnap.exists()) {
+        readLaterList = docSnap.data().books || [];
+      }
+
+      if (readLater) {
+        // Remove from read later list
+        readLaterList = readLaterList.filter((bookId: string) => bookId !== id);
+      } else {
+        // Add to read later list
+        readLaterList.push(id);
+      }
+
+      await setDoc(docRef, { books: readLaterList }, { merge: true });
+      setReadLater(!readLater);
     }
   };
 

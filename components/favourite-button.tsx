@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { FaStar } from "react-icons/fa";
 import { useUser } from "@clerk/nextjs";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
-import { app } from "@/firebaseConfig"; //
+import { app } from "@/firebaseConfig";
 
 export default function StarButton({ id }: { id: string }) {
   const { user } = useUser();
@@ -13,12 +13,13 @@ export default function StarButton({ id }: { id: string }) {
 
   useEffect(() => {
     const checkFavoriteStatus = async () => {
-      if (user && user.emailAddresses) {
+      if (user?.emailAddresses?.[0]?.emailAddress) {
         const userEmail = user.emailAddresses[0].emailAddress;
-        const docRef = doc(db, "users", userEmail, "favorites", id);
+        const docRef = doc(db, "users", userEmail, "bookLists", "favorites");
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          setFavorite(true);
+          const favorites = docSnap.data().books || [];
+          setFavorite(favorites.includes(id));
         }
       }
     };
@@ -27,12 +28,26 @@ export default function StarButton({ id }: { id: string }) {
   }, [user, id, db]);
 
   const handleFavoriteClick = async () => {
-    setFavorite(!favorite);
-    if (user && user.emailAddresses) {
+    if (user?.emailAddresses?.[0]?.emailAddress) {
       const userEmail = user.emailAddresses[0].emailAddress;
-      const FavitemId = id;
-      const docRef = doc(db, "users", userEmail, "favorites", FavitemId);
-      await setDoc(docRef, { FavitemId }, { merge: true });
+      const docRef = doc(db, "users", userEmail, "bookLists", "favorites");
+      const docSnap = await getDoc(docRef);
+
+      let favorites = [];
+      if (docSnap.exists()) {
+        favorites = docSnap.data().books || [];
+      }
+
+      if (favorite) {
+        // Remove from favorites
+        favorites = favorites.filter((bookId: string) => bookId !== id);
+      } else {
+        // Add to favorites
+        favorites.push(id);
+      }
+
+      await setDoc(docRef, { books: favorites }, { merge: true });
+      setFavorite(!favorite);
     }
   };
 
