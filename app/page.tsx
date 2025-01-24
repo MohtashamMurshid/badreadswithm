@@ -2,8 +2,13 @@
 import AuthorsPick from "@/components/AuthorsPick";
 import Landing from "@/components/Landing";
 import Loading from "@/components/Loading";
+import TopPicks from "@/components/TopPicks";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { getFantasyTopPicks } from "@/utils/getFantasyTopPicks";
+import { getFictionTopPicks } from "@/utils/getFictionTopPicks";
+import { getMysteryTopPicks } from "@/utils/getMysteryTopPicks";
+import { getRomanceTopPicks } from "@/utils/getRomanceTopPicks";
 import { fetchBooks } from "@/utils/googleApi";
 import Image from "next/image";
 import Link from "next/link";
@@ -57,6 +62,14 @@ export default function Page() {
       {loading && <Loading />}
       {error && <p className="text-red-500">{error}</p>}
       {books.length === 0 && !loading && !error && <AuthorsPick />}
+      {books.length === 0 && !loading && !error && (
+        <div>
+          <TopPicks getpicks={getFantasyTopPicks} title="Popular Fantasy" />
+          <TopPicks getpicks={getFictionTopPicks} title="Popular Fiction" />
+          <TopPicks getpicks={getMysteryTopPicks} title="Popular Mystery" />
+          <TopPicks getpicks={getRomanceTopPicks} title="Popular Romance" />
+        </div>
+      )}
 
       {/* Books Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 w-full max-w-7xl mt-4">
