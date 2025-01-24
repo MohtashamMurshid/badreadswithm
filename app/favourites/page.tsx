@@ -100,10 +100,14 @@ export default function FavoritesPage() {
 
   return (
     <div className="p-4 md:p-10">
-      <h1 className="text-3xl font-bold mb-8">My Library</h1>
+      <h1 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+        My Library
+      </h1>
 
       <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4">Favorites</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-purple-600">
+          Favorites
+        </h2>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {favorites.map((book) => (
             <Link href={`/book/${book.id}`} key={`fav-${book.id}`}>
@@ -117,7 +121,9 @@ export default function FavoritesPage() {
                     className="w-full h-auto rounded"
                   />
                 )}
-                <h3 className="font-semibold mt-2">{book.title}</h3>
+                <h3 className="font-bold mt-2 text-sm truncate hover:text-purple-600 transition-colors">
+                  {book.title}
+                </h3>
                 <p className="text-sm text-gray-600">
                   {book.authors?.join(", ")}
                 </p>
@@ -131,7 +137,9 @@ export default function FavoritesPage() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-semibold mb-4">Read Later</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-purple-600">
+          Read Later
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {readLater.map((book) => (
             <Link href={`/book/${book.id}`} key={`readlater-${book.id}`}>

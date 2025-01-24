@@ -31,7 +31,7 @@ export default function SearchBooks() {
 
   return (
     <>
-      <div className="flex flex-row items-center justify-center w-full max-w-3xl space-x-4">
+      <div className="flex flex-row items-center justify-center w-full max-w-3xl space-x-2">
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -66,8 +66,10 @@ export default function SearchBooks() {
                     objectFit="cover"
                   />
                 )}
-                <h3 className="font-semibold text-center">{book.title}</h3>
-                <p className="text-sm text-gray-600 text-center">
+                <h3 className="font-bold text-sm text-center hover:text-purple-600 transition-colors truncate w-full">
+                  {book.title}
+                </h3>
+                <p className="text-xs text-gray-600 text-center truncate w-full">
                   {book.authors.join(", ")}
                 </p>
               </div>

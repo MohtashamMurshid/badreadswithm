@@ -1,20 +1,36 @@
 "use client";
 
+import React from "react";
+
 const Fallback = () => {
   return (
-    <div className="w-full">
-      <div className="flex justify-center mb-6">
-        <div className="w-48 h-8 bg-gray-200 dark:bg-gray-800  rounded animate-pulse" />
-      </div>
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 w-full">
-        {[...Array(12)].map((_, index) => (
+    <div className="w-full max-w-7xl mx-auto p-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        {[...Array(12)].map((_, i) => (
           <div
-            key={index}
-            className="p-4 border rounded shadow flex flex-col items-center space-y-2 animate-pulse"
+            key={i}
+            className="p-4 border rounded-lg shadow-md animate-pulse bg-background/5 transition-shadow duration-200 hover:shadow-lg"
           >
-            <div className="w-full h-56 bg-gray-200 dark:bg-gray-800 rounded" />
-            <div className="w-3/4 h-4 bg-gray-200 dark:bg-gray-800  rounded" />
-            <div className="w-1/2 h-3 bg-gray-200 dark:bg-gray-800  rounded" />
+            <div className="w-full aspect-[2/3] bg-muted/60 rounded-md mb-4 relative overflow-hidden">
+              <div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-background/10 to-transparent animate-shimmer"
+                style={{ backgroundSize: "200% 100%" }}
+              />
+            </div>
+            <div className="space-y-3">
+              <div className="h-4 bg-muted/60 rounded-full w-[85%] relative overflow-hidden">
+                <div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-background/10 to-transparent animate-shimmer"
+                  style={{ backgroundSize: "200% 100%" }}
+                />
+              </div>
+              <div className="h-3 bg-muted/60 rounded-full w-[65%] relative overflow-hidden">
+                <div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-background/10 to-transparent animate-shimmer"
+                  style={{ backgroundSize: "200% 100%" }}
+                />
+              </div>
+            </div>
           </div>
         ))}
       </div>

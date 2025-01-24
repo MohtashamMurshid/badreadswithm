@@ -46,8 +46,10 @@ export default function TopPicks({
   if (loading) return <Loading />;
 
   return (
-    <div className="w-full p-4">
-      <h1 className="text-2xl font-semibold mb-4 text-center">{title}</h1>
+    <div className="w-full p-4 flex flex-col gap-4">
+      <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70 text-center">
+        {title}
+      </h1>
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {books.map((book) => (
           <Link href={`/book/${book.id}`} key={book.id}>
@@ -61,7 +63,7 @@ export default function TopPicks({
                   className="w-full h-auto rounded"
                 />
               )}
-              <h3 className="font-semibold mt-2 text-sm truncate">
+              <h3 className="font-bold mt-2 text-sm truncate hover:text-purple-600 transition-colors">
                 {book.title}
               </h3>
               <p className="text-xs text-gray-600 truncate">

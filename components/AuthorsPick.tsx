@@ -66,8 +66,8 @@ export default function AuthorsPick() {
   if (loading) return <Fallback />;
 
   return (
-    <div className="w-full p-4 ">
-      <h1 className="text-2xl font-semibold mb-4 text-center">
+    <div className="w-full p-4 flex gap-4 flex-col ">
+      <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70 text-center">
         Author&apos;s Picks
       </h1>
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 ">
@@ -83,7 +83,7 @@ export default function AuthorsPick() {
                   className="w-full h-auto rounded"
                 />
               )}
-              <h3 className="font-semibold mt-2 text-sm truncate">
+              <h3 className="font-bold mt-2 text-sm truncate hover:text-purple-600 transition-colors">
                 {book.title}
               </h3>
               <p className="text-xs text-gray-600 truncate">
