@@ -41,7 +41,7 @@ export default async function Page({
           <StarButton id={(await params).id} />
         </SignedIn>
         <SignedOut>
-          <p className="text-gray-500">
+          <p className="text-red-500">
             Sign in to add to your favourites and read later
           </p>
         </SignedOut>
