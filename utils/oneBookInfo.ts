@@ -1,6 +1,9 @@
 export async function fetchOneBookInfo(id: string) {
   const response = await fetch(
-    `https://www.googleapis.com/books/v1/volumes/${id}`
+    `https://www.googleapis.com/books/v1/volumes/${id}`,
+    {
+      cache: "force-cache",
+    }
   );
 
   if (!response.ok) {
