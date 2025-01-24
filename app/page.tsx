@@ -1,4 +1,5 @@
 "use client";
+import AuthorsPick from "@/components/AuthorsPick";
 import Landing from "@/components/Landing";
 import Loading from "@/components/Loading";
 import { Button } from "@/components/ui/button";
@@ -55,9 +56,10 @@ export default function Page() {
       {/* Loading or Error Message */}
       {loading && <Loading />}
       {error && <p className="text-red-500">{error}</p>}
+      {books.length === 0 && !loading && !error && <AuthorsPick />}
 
       {/* Books Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-7xl mt-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 w-full max-w-7xl mt-4">
         {books.map((book) => (
           <Link href="/book/[id]" as={`/book/${book.id}`} key={book.id}>
             <div className="p-4 border rounded shadow hover:shadow-lg flex flex-col items-center space-y-2">
@@ -79,7 +81,7 @@ export default function Page() {
           </Link>
         ))}
       </div>
-      <footer className="p-4 text-gray-600">
+      <footer className="p-4 text-gray-600 ">
         <p className="text-center ">
           &copy; {new Date().getFullYear()} Bad Reads
         </p>
