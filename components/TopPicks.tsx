@@ -40,7 +40,7 @@ export default function TopPicks({
     };
 
     fetchTopPicks();
-  }, [getpicks]);
+  }, []);
 
   if (loading) return <Loading />;
 

@@ -5,8 +5,15 @@ import { FaStar } from "react-icons/fa";
 import { useUser } from "@clerk/nextjs";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { app } from "@/firebaseConfig";
+import { cn } from "@/lib/utils";
 
-export default function StarButton({ id }: { id: string }) {
+export default function StarButton({
+  id,
+  className,
+}: {
+  id: string;
+  className?: string;
+}) {
   const { user } = useUser();
   const [favorite, setFavorite] = useState(false);
   const db = getFirestore(app);
@@ -52,7 +59,11 @@ export default function StarButton({ id }: { id: string }) {
   };
 
   return (
-    <Button variant="outline" onClick={handleFavoriteClick}>
+    <Button
+      variant="outline"
+      onClick={handleFavoriteClick}
+      className={cn("", className)}
+    >
       {favorite ? (
         <FaStar className="text-yellow-400"></FaStar>
       ) : (

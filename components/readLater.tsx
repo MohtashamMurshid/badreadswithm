@@ -4,8 +4,15 @@ import { Button } from "./ui/button";
 import { useUser } from "@clerk/nextjs";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { app } from "@/firebaseConfig";
+import { cn } from "@/lib/utils";
 
-export default function ReadLater({ id }: { id: string }) {
+export default function ReadLater({
+  id,
+  className,
+}: {
+  id: string;
+  className?: string;
+}) {
   const { user } = useUser();
   const [readLater, setReadLater] = useState(false);
   const db = getFirestore(app);
@@ -51,7 +58,11 @@ export default function ReadLater({ id }: { id: string }) {
   };
 
   return (
-    <Button variant="outline" onClick={handleReadLaterClick}>
+    <Button
+      variant="outline"
+      onClick={handleReadLaterClick}
+      className={cn("", className)}
+    >
       {readLater ? "Reading later" : "Read Later"}
     </Button>
   );

@@ -6,6 +6,7 @@ import { app } from "@/firebaseConfig";
 import BookCard from "@/components/BookCard";
 import Loading from "@/components/Loading";
 import { fetchOneBookInfo } from "@/utils/oneBookInfo";
+import ShareButton from "@/components/share-button";
 
 interface Book {
   id: string;
@@ -19,6 +20,7 @@ export default function FavoritesPage() {
   const [favorites, setFavorites] = useState<Book[]>([]);
   const [readLater, setReadLater] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("favorites");
 
   useEffect(() => {
     const fetchSavedBooks = async () => {
@@ -99,28 +101,50 @@ export default function FavoritesPage() {
 
   return (
     <div className="p-4 md:p-10">
-      <h1 className="text-4xl  font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70 text-center">
+      <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70 text-center mb-8">
         My Library
       </h1>
 
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70 ">
-          Favorites
-        </h2>
+      <div className="flex justify-between items-center mb-6">
+        <div className="flex space-x-4">
+          <button
+            onClick={() => setActiveTab("favorites")}
+            className={`px-4 py-2 text-lg font-semibold transition-colors duration-200 ${
+              activeTab === "favorites"
+                ? "text-primary border-b-2 border-primary"
+                : "text-gray-500 hover:text-primary"
+            }`}
+          >
+            Favorites
+          </button>
+          <button
+            onClick={() => setActiveTab("readLater")}
+            className={`px-4 py-2 text-lg font-semibold transition-colors duration-200 ${
+              activeTab === "readLater"
+                ? "text-primary border-b-2 border-primary"
+                : "text-gray-500 hover:text-primary"
+            }`}
+          >
+            Read Later
+          </button>
+        </div>
+        {user?.emailAddresses?.[0]?.emailAddress && <ShareButton />}
+      </div>
+
+      {activeTab === "favorites" && (
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {favorites.map((book) => (
             <BookCard key={`fav-${book.id}`} book={book} prefix="fav" />
           ))}
+          {favorites.length === 0 && (
+            <p className="text-gray-500 col-span-full text-center">
+              No favorite books yet.
+            </p>
+          )}
         </div>
-        {favorites.length === 0 && (
-          <p className="text-gray-500">No favorite books yet.</p>
-        )}
-      </section>
+      )}
 
-      <section>
-        <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70 ">
-          Read Later
-        </h2>
+      {activeTab === "readLater" && (
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {readLater.map((book) => (
             <BookCard
@@ -129,11 +153,13 @@ export default function FavoritesPage() {
               prefix="readlater"
             />
           ))}
+          {readLater.length === 0 && (
+            <p className="text-gray-500 col-span-full text-center">
+              No books marked for reading later.
+            </p>
+          )}
         </div>
-        {readLater.length === 0 && (
-          <p className="text-gray-500">No books marked for reading later.</p>
-        )}
-      </section>
+      )}
     </div>
   );
 }

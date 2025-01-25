@@ -8,7 +8,7 @@ import { Button } from "./ui/button";
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 right-0 p-4 flex items-center space-x-2">
+    <nav className="sticky top-0 right-0 m-4 flex items-center justify-end space-x-2 z-50  rounded">
       <ModeToggle />
       <SignedOut>
         <Button variant="outline">

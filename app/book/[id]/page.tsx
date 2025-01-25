@@ -3,8 +3,6 @@ import ReadLater from "@/components/readLater";
 import { fetchOneBookInfo } from "@/utils/oneBookInfo";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Image from "next/image";
-import Link from "next/link";
-import { FaArrowLeft } from "react-icons/fa";
 
 export default async function Page({
   params,
@@ -15,9 +13,6 @@ export default async function Page({
 
   return (
     <div className="p-10 max-w-4xl mx-auto">
-      <Link href="/" passHref className="fixed top-4 left-4">
-        <FaArrowLeft className=" text-xl cursor-pointer" />
-      </Link>
       {/* Title and Subtitle */}
       <h1 className="text-3xl font-bold">{bookInfo.title}</h1>
       {bookInfo.subtitle && (
