@@ -1,10 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { app } from "@/firebaseConfig";
 import BookCard from "@/components/BookCard";
 import { fetchOneBookInfo } from "@/utils/oneBookInfo";
+import Loading from "@/components/Loading";
 
 interface Book {
   id: string;
@@ -13,7 +14,7 @@ interface Book {
   thumbnail: string;
 }
 
-export default function SharePage() {
+function SharePageContent() {
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
   const [books, setBooks] = useState<Book[]>([]);
@@ -58,5 +59,13 @@ export default function SharePage() {
         ))}
       </div>
     </div>
+  );
+}
+
+export default function SharePage() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <SharePageContent />
+    </Suspense>
   );
 }
