@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { app } from "@/firebaseConfig";
-import Image from "next/image";
-import Link from "next/link";
+import BookCard from "@/components/BookCard";
 import Loading from "@/components/Loading";
 import { fetchOneBookInfo } from "@/utils/oneBookInfo";
 
@@ -110,25 +109,7 @@ export default function FavoritesPage() {
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {favorites.map((book) => (
-            <Link href={`/book/${book.id}`} key={`fav-${book.id}`}>
-              <div className="p-4 border rounded shadow hover:shadow-lg transition-shadow">
-                {book.thumbnail && (
-                  <Image
-                    src={book.thumbnail}
-                    alt={book.title}
-                    width={200}
-                    height={300}
-                    className="w-full h-auto rounded"
-                  />
-                )}
-                <h3 className="font-bold mt-2 text-sm truncate hover:text-purple-600 transition-colors">
-                  {book.title}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  {book.authors?.join(", ")}
-                </p>
-              </div>
-            </Link>
+            <BookCard key={`fav-${book.id}`} book={book} prefix="fav" />
           ))}
         </div>
         {favorites.length === 0 && (
@@ -142,23 +123,11 @@ export default function FavoritesPage() {
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {readLater.map((book) => (
-            <Link href={`/book/${book.id}`} key={`readlater-${book.id}`}>
-              <div className="p-4 border rounded shadow hover:shadow-lg transition-shadow">
-                {book.thumbnail && (
-                  <Image
-                    src={book.thumbnail}
-                    alt={book.title}
-                    width={200}
-                    height={300}
-                    className="w-full h-auto rounded"
-                  />
-                )}
-                <h3 className="font-semibold mt-2">{book.title}</h3>
-                <p className="text-sm text-gray-600">
-                  {book.authors?.join(", ")}
-                </p>
-              </div>
-            </Link>
+            <BookCard
+              key={`readlater-${book.id}`}
+              book={book}
+              prefix="readlater"
+            />
           ))}
         </div>
         {readLater.length === 0 && (

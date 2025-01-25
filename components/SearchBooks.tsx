@@ -2,8 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { fetchBooks } from "@/utils/googleApi";
-import Image from "next/image";
-import Link from "next/link";
+import BookCard from "@/components/BookCard";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import Loading from "./Loading";
@@ -54,26 +53,7 @@ export default function SearchBooks() {
       {books.length > 0 && (
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 w-full max-w-7xl mt-4">
           {books.map((book) => (
-            <Link href={`/book/${book.id}`} key={book.id}>
-              <div className="p-4 border rounded shadow hover:shadow-lg flex flex-col items-center space-y-2">
-                {book.thumbnail && (
-                  <Image
-                    src={book.thumbnail}
-                    alt={book.title}
-                    className="w-full h-auto rounded"
-                    width={200}
-                    height={400}
-                    objectFit="cover"
-                  />
-                )}
-                <h3 className="font-bold text-sm text-center hover:text-purple-600 transition-colors truncate w-full">
-                  {book.title}
-                </h3>
-                <p className="text-xs text-gray-600 text-center truncate w-full">
-                  {book.authors.join(", ")}
-                </p>
-              </div>
-            </Link>
+            <BookCard key={book.id} book={book} />
           ))}
         </div>
       )}

@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import BookCard from "@/components/BookCard";
 import Loading from "@/components/Loading";
 
 interface Book {
@@ -52,25 +51,7 @@ export default function TopPicks({
       </h1>
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {books.map((book) => (
-          <Link href={`/book/${book.id}`} key={book.id}>
-            <div className="p-2 border rounded shadow hover:shadow-lg transition-shadow">
-              {book.thumbnail && (
-                <Image
-                  src={book.thumbnail}
-                  alt={book.title}
-                  width={150}
-                  height={225}
-                  className="w-full h-auto rounded"
-                />
-              )}
-              <h3 className="font-bold mt-2 text-sm truncate hover:text-purple-600 transition-colors">
-                {book.title}
-              </h3>
-              <p className="text-xs text-gray-600 truncate">
-                {book.authors?.join(", ")}
-              </p>
-            </div>
-          </Link>
+          <BookCard key={book.id} book={book} />
         ))}
       </div>
       {books.length === 0 && (
