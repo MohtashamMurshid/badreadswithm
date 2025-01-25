@@ -128,7 +128,8 @@ export default function FavoritesPage() {
             Read Later
           </button>
         </div>
-        {user?.emailAddresses?.[0]?.emailAddress && <ShareButton />}
+        {user?.emailAddresses?.[0]?.emailAddress &&
+          activeTab === "favorites" && <ShareButton />}
       </div>
 
       {activeTab === "favorites" && (

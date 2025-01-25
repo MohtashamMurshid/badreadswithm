@@ -47,7 +47,7 @@ function SharePageContent() {
   }
 
   if (loading) {
-    return <div className="p-4">Loading...</div>;
+    return <Loading />;
   }
 
   return (
