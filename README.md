@@ -1,7 +1,7 @@
 
 # BadReads 📚
 
-A modern book discovery platform built with Next.js 13, where readers can explore, save, and share their favorite books. Features include:
+A modern book discovery platform built with Next.js 15, where readers can explore, save, and share their favorite books. Features include:
 
 - 📖 Search and browse books from multiple genres
 - ⭐ Save favorite books and create reading lists
