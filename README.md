@@ -10,7 +10,7 @@ A modern book discovery platform built with Next.js 13, where readers can explor
 - 🎨 Clean, responsive UI with dark mode support
 
 Built using:
-- Next.js 13 (App Router)
+- Next.js 15 with Api Routes (App Router)
 - TypeScript
 - Tailwind CSS
 - Firebase/Firestore
