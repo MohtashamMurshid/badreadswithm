@@ -51,11 +51,16 @@ export default function SearchBooks() {
       {error && <p className="text-red-500">{error}</p>}
 
       {books.length > 0 && (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 w-full max-w-7xl mt-4">
-          {books.map((book) => (
-            <BookCard key={book.id} book={book} />
-          ))}
-        </div>
+        <>
+          <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70 text-center">
+            Search Results
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 w-full max-w-7xl mt-4">
+            {books.map((book) => (
+              <BookCard key={book.id} book={book} />
+            ))}
+          </div>
+        </>
       )}
     </>
   );
