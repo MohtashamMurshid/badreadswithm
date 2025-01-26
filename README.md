@@ -17,4 +17,4 @@ Built using:
 - Clerk Authentication
 - Google Books API
 
-Live demo: [BadReads](your-deployment-url)
+Live demo: [BadReads](https://badreadswithm.vercel.app/)
