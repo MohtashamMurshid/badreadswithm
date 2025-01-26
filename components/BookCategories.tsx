@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import TopPicks from "@/components/TopPicks";
 import AuthorsPick from "./AuthorsPick";
+import { getAuthorsPicks } from "@/utils/getAuthorsPicks";
 
 interface Props {
   getFantasyTopPicks: any[];
@@ -9,7 +10,7 @@ interface Props {
   getRomanceTopPicks: any[];
 }
 
-export default function BookCategories({
+export default async function BookCategories({
   getFantasyTopPicks,
   getFictionTopPicks,
   getMysteryTopPicks,
@@ -17,7 +18,7 @@ export default function BookCategories({
 }: Props) {
   return (
     <>
-      <AuthorsPick />
+      <AuthorsPick books={await getAuthorsPicks()} />
       <div>
         <TopPicks books={getFantasyTopPicks} title="Popular Fantasy" />
         <TopPicks books={getFictionTopPicks} title="Popular Fiction" />
