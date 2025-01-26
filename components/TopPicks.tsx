@@ -1,8 +1,6 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import BookCard from "@/components/BookCard";
-import Loading from "@/components/Loading";
 
 interface Book {
   id: string;
@@ -12,38 +10,12 @@ interface Book {
 }
 
 export default function TopPicks({
-  getpicks,
+  books,
   title,
 }: {
-  getpicks: () => Promise<void>;
+  books: Book[];
   title: string;
 }) {
-  const [books, setBooks] = useState<Book[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTopPicks = async () => {
-      try {
-        const topPicks = await getpicks();
-        if (Array.isArray(topPicks)) {
-          setBooks(topPicks);
-        } else {
-          console.error("Invalid data format received for top picks");
-          setBooks([]);
-        }
-      } catch (error) {
-        console.error("Error fetching top picks:", error);
-        setBooks([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTopPicks();
-  }, []);
-
-  if (loading) return <Loading />;
-
   return (
     <div className="w-full p-4 flex flex-col gap-4">
       <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70 text-center">

@@ -1,19 +1,28 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import TopPicks from "@/components/TopPicks";
-import { getFantasyTopPicks } from "@/utils/getFantasyTopPicks";
-import { getFictionTopPicks } from "@/utils/getFictionTopPicks";
-import { getMysteryTopPicks } from "@/utils/getMysteryTopPicks";
-import { getRomanceTopPicks } from "@/utils/getRomanceTopPicks";
 import AuthorsPick from "./AuthorsPick";
 
-export default async function BookCategories() {
+interface Props {
+  getFantasyTopPicks: any[];
+  getFictionTopPicks: any[];
+  getMysteryTopPicks: any[];
+  getRomanceTopPicks: any[];
+}
+
+export default function BookCategories({
+  getFantasyTopPicks,
+  getFictionTopPicks,
+  getMysteryTopPicks,
+  getRomanceTopPicks,
+}: Props) {
   return (
     <>
       <AuthorsPick />
       <div>
-        <TopPicks getpicks={getFantasyTopPicks} title="Popular Fantasy" />
-        <TopPicks getpicks={getFictionTopPicks} title="Popular Fiction" />
-        <TopPicks getpicks={getMysteryTopPicks} title="Popular Mystery" />
-        <TopPicks getpicks={getRomanceTopPicks} title="Popular Romance" />
+        <TopPicks books={getFantasyTopPicks} title="Popular Fantasy" />
+        <TopPicks books={getFictionTopPicks} title="Popular Fiction" />
+        <TopPicks books={getMysteryTopPicks} title="Popular Mystery" />
+        <TopPicks books={getRomanceTopPicks} title="Popular Romance" />
       </div>
     </>
   );

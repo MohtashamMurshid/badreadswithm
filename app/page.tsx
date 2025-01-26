@@ -3,14 +3,29 @@ import SearchBooks from "@/components/SearchBooks";
 import BookCategories from "@/components/BookCategories";
 import { Suspense } from "react";
 import Fallback from "@/components/Fallback";
+import { getFantasyTopPicks } from "@/utils/getFantasyTopPicks";
+import { getFictionTopPicks } from "@/utils/getFictionTopPicks";
+import { getMysteryTopPicks } from "@/utils/getMysteryTopPicks";
+import { getRomanceTopPicks } from "@/utils/getRomanceTopPicks";
 
-export default function Page() {
+export default async function Page() {
+  const [fantasy, fiction, mystery, romance] = await Promise.all([
+    getFantasyTopPicks(),
+    getFictionTopPicks(),
+    getMysteryTopPicks(),
+    getRomanceTopPicks(),
+  ]);
   return (
     <div className="p-4 md:p-10 flex flex-col items-center space-y-4">
       <Landing />
       <SearchBooks />
       <Suspense fallback={<Fallback />}>
-        <BookCategories />
+        <BookCategories
+          getFantasyTopPicks={fantasy}
+          getFictionTopPicks={fiction}
+          getMysteryTopPicks={mystery}
+          getRomanceTopPicks={romance}
+        />
       </Suspense>
     </div>
   );
